@@ -1,6 +1,6 @@
 # PhilipsHue
 
-An Particle.io library for connected devices implementing the [Philips Hue API](https://developers.meethue.com/philips-hue-api)! This library handles API calls to the Philips Hue Bridge, which in turn allows you to control your lights from your WiFi enabled Particle device such as an Argon or Xenon! 
+A Particle.io library for connected devices implementing the [Philips Hue API](https://developers.meethue.com/philips-hue-api)! This library handles API calls to the Philips Hue Bridge, which in turn allows you to control your lights from your WiFi enabled Particle device such as an Argon or Xenon! 
 
 Your Particle device can send requests to turn all of your lights off with one command, or set individual light attributes one by one. Functions have been written to manipulate attributes for the [/lights](https://developers.meethue.com/documentation/lights-api) and [/groups](https://developers.meethue.com/documentation/groups-api) endpoints of the Hue API. To learn more about the Hue API check out the [Philips Hue API documentation](https://developers.meethue.com/philips-hue-api). To learn more about how Philips Hue works check out [How Hue Works](https://www.developers.meethue.com/documentation/how-hue-works).
 
@@ -60,19 +60,18 @@ All the hue lights in your house will start blinking, turning on for 3 seconds, 
 
 # Things you should know...
 
-* Totally regeret that state you just put your lights in? Unplug your Arduino, and toggle the power to your lights to reset.
 * You can safely send about 10 /lights endpoint commands in a row/second before things get strange.
 * You can only send 1 /groups targeted command per second! Be careful not to overload the bridge.
 * A list of other interesting design decisions and intricacies of the Hue Lights API [can be found here.](https://developers.meethue.com/things-you-need-know)
 
 
 ## Coming Soon
-* Ability to submit custom JSON to /groups and /lights endpoints from within Arduino sketch
-  * ex: ``` sendRequestToLights(lightId, "{\"on\":true,\"hue\":50000,\"brightness\":200,\"sat\":254}");```
 * Ability to install the plugin through the Particle CLI
+* Ability to submit custom JSON to /groups and /lights endpoints from within Arduino sketch
+* ex: ``` sendRequestToLights(lightId, "{\"on\":true,\"hue\":50000,\"brightness\":200,\"sat\":254}");```
 * More global attribute functions for changing attributes accross all groups
 
 ## Contributions
-This library was ported from the [hueDino][https://github.com/andium/hueDino] library by [Andium][https://github.com/andium].  Thanks go out to [Nils Mattisson](https://github.com/nmattisson) for Spark Core [HTTP Client](https://github.com/nmattisson/httpclient)  and [Benoit Blanchon](https://github.com/bblanchon) for [ArduinoJson](https://github.com/bblanchon/ArduinoJson)! 
+This library was ported from the [hueDino](https://github.com/andium/hueDino) library by [Andium](https://github.com/andium).  Thanks go out to [Nils Mattisson](https://github.com/nmattisson) for Spark Core [HTTP Client](https://github.com/nmattisson/httpclient)  and [Benoit Blanchon](https://github.com/bblanchon) for [ArduinoJson](https://github.com/bblanchon/ArduinoJson)! 
               
 
