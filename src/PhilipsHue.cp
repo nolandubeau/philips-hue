@@ -199,26 +199,27 @@ http_response_t PhilipsHue::lightOff(uint8_t lightId)
 }
 
 
-http_response_t PhilipsHue::lightBrightness(uint8_t lightId, uint8_t brightness)
+String PhilipsHue::brightness(uint8_t lightId, uint8_t brightness)
 {
 	#ifdef DEBUG
 		Serial.println();Serial.print("Light ID: ");
 		Serial.print(lightId);Serial.print(" set brightness to ");
 		Serial.println(brightness);
 	#endif
+	String bri = "{\"transitiontime\":0, \"bri\":";
 
- 	JsonWriterStatic<256> jw; 
-	{
-		JsonWriterAutoObject obj(&jw);
-		jw.insertKeyValue("bri",brightness);
-		jw.insertKeyValue("transitiontime",1);				
-	}
+		http_header_t headers[] = {
+		{ "Accept" , "*/*"},
+		{ NULL, NULL } // NOTE: Always terminate headers with NULL
+	};
 
-	request.body = jw.getBuffer();
+	bri += String(brightness);
+	bri += "}";
 	request.path = _lightStateEndpoint(lightId);
+	request.body = bri;
 	_restclient.put(request,response,headers);
-
-	return response;
+    //_restclient.put(_lightStateEndpoint(lightId), bri);
+    return response.body;
 }
 
 http_response_t PhilipsHue::lightHue(uint8_t lightId, uint16_t hue)
@@ -246,6 +247,7 @@ http_response_t PhilipsHue::lightHue(uint8_t lightId, uint16_t hue)
 	_restclient.put(request,response,headers);
 
 	return response;
+
 }
 
 //Input range 0-254

@@ -2,10 +2,13 @@
 /* PhilipsHue library by Nolan Dubeau
  */
 
+#ifndef __PhilipsHue_H
+#define __PhilipsHue_H
+
 // This will load the definition for common Particle variable types
-// #include <Arduino.h>
 #include "Particle.h"
-// #include "ArduinoJson.h"
+#include "HttpClient.h"
+#include "JsonParserGeneratorRK.h"
 
 #define LIGHT_ON "{\"on\":true}"
 #define LIGHT_OFF "{\"on\":false}"
@@ -14,6 +17,7 @@
 #define MAX_LIGHTS_PER_BRIDGE 50
 #define MAX_GROUPS_PER_BRIDGE 64
 
+//#define DEBUG
 // This is your main class that users will import into their application
 class PhilipsHue
 {
@@ -25,17 +29,17 @@ public:
 	uint8_t numGroups = 0;
 	uint8_t numLights = 0;
 
-	PhilipsHue(const char* hueBridgeIP, int hueBridgePort);
+	PhilipsHue();
 
-	uint8_t begin(const char* userId);
+	uint8_t begin(const char* hueBridgeIP, int hueBridgePort, const char* userId);
 	String registerApp(String username);
 
 	/*Single /light endpoint methods*/
 	// String getLightIds(void);
-	String lightOn(uint8_t lightId);
-	String lightOff(uint8_t lightId);
-	String brightness(uint8_t lightId, uint8_t brightness);
-	String hue(uint8_t lightId, uint16_t setHue);
+	http_response_t lightOn(uint8_t lightId, uint8_t brightness);
+	http_response_t lightOff(uint8_t lightId);
+	http_response_t lightBrightness(uint8_t lightId, uint8_t brightness);
+	http_response_t lightHue(uint8_t lightId, uint16_t setHue);
 	String sat(uint8_t lightId, uint8_t setSat);
 	String colorLoop(uint8_t lightId, bool enable);
 	String colorTemp(uint8_t lightId, uint16_t temp);
@@ -67,9 +71,11 @@ private:
 	const char* _hueBridgeIP;
 	int _hueBridgePort;
 
-	String _lightStateEndpoint(uint8_t lightId);
+	const char* _lightStateEndpoint(uint8_t lightId);
 	String _groupActionEndpoint(uint8_t groupId);
 	String _getLights(void);
 	String _getGroups(void);
 
 };
+
+#endif /*__PhilipsHue_H */
