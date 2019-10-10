@@ -1,6 +1,6 @@
 # Philips Hue	 - Particle Library
 
-A Particle.io library for connected devices implementing the [Philips Hue API](https://developers.meethue.com/philips-hue-api)! This library handles API calls to the Philips Hue Bridge, which in turn allows you to control your lights from your WiFi enabled Particle device such as an Argon or Xenon! 
+A Particle.io library for connected devices implementing the [Philips Hue API](https://developers.meethue.com/philips-hue-api) over HTTP. This library handles API calls to the Philips Hue Bridge, which in turn allows you to control your lights from your WiFi enabled Particle device such as an Argon or Xenon! 
 
 Your Particle device can send requests to turn all of your lights off with one command, or set individual light attributes one by one. Functions have been written to manipulate attributes for the [/lights](https://developers.meethue.com/documentation/lights-api) and [/groups](https://developers.meethue.com/documentation/groups-api) endpoints of the Hue API. To learn more about the Hue API check out the [Philips Hue API documentation](https://developers.meethue.com/philips-hue-api). To learn more about how Philips Hue works check out [How Hue Works](https://www.developers.meethue.com/documentation/how-hue-works).
 
