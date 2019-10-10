@@ -36,7 +36,7 @@ public:
 
 	/*Single /light endpoint methods*/
 	// String getLightIds(void);
-	http_response_t lightOn(uint8_t lightId, uint8_t brightness);
+	http_response_t lightOn(uint8_t lightId, uint8_t brightness, uint16_t hue, uint8_t saturation);
 	http_response_t lightOff(uint8_t lightId);
 	http_response_t lightBrightness(uint8_t lightId, uint8_t brightness);
 	http_response_t lightHue(uint8_t lightId, uint16_t setHue);

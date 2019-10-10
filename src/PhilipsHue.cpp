@@ -143,13 +143,12 @@ String PhilipsHue::registerApp(String username)
 }
 
 
-http_response_t PhilipsHue::lightOn(uint8_t lightId, uint8_t brightness)
+http_response_t PhilipsHue::lightOn(uint8_t lightId, uint8_t brightness,uint16_t hue, uint8_t saturation)
 {	
-	// #ifdef DEBUG
-	// 	Serial.println();Serial.print("Light ID: ");
-	// 	Serial.print(lightId);Serial.println(" ON");
-	// 	Serial.println(request.path);
-	// #endif
+	#ifdef DEBUG
+		Serial.println();Serial.print("Light ID: ");
+		Serial.print(lightId);Serial.println(" ON");
+	#endif
 
 	http_header_t headers[] = {
 		{ "Accept" , "*/*"},
@@ -161,14 +160,16 @@ http_response_t PhilipsHue::lightOn(uint8_t lightId, uint8_t brightness)
 		JsonWriterAutoObject obj(&jw);
 		jw.insertKeyValue("on", true);
 		jw.insertKeyValue("bri",brightness);
-		jw.insertKeyValue("sat",254);
+		jw.insertKeyValue("hue",hue);
+		jw.insertKeyValue("sat",saturation);
 		jw.insertKeyValue("transitiontime",0);				
 	}
 
 	request.body = jw.getBuffer();
 	request.path = _lightStateEndpoint(lightId);
+	Serial.println(request.path);
 	_restclient.put(request,response,headers);
-
+	Serial.println(response.body);
 	return response;
 }
 
