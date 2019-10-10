@@ -66,7 +66,6 @@ All the hue lights in your house will start blinking, turning on for 3 seconds, 
 * Additional examples
 * Ability to install the plugin through the Particle CLI
 * Ability to submit custom JSON to /groups and /lights endpoints
-* ex: ``` sendRequestToLights(lightId, "{\"on\":true,\"hue\":50000,\"brightness\":200,\"sat\":254}");```
 * More global attribute functions for changing attributes accross all groups
 
 ## Contributions
